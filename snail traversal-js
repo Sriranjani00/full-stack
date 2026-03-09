@@ -1,0 +1,38 @@
+/**
+ * @param {number} rowsCount
+ * @param {number} colsCount
+ * @return {Array<Array<number>>}
+ */
+Array.prototype.snail = function(rowsCount, colsCount) {
+    // Check if the total elements match the 1D array length
+    if (rowsCount * colsCount !== this.length) {
+        return [];
+    }
+
+    // Initialize the 2D array with empty rows
+    const result = Array.from({ length: rowsCount }, () => []);
+
+    for (let i = 0; i < this.length; i++) {
+        // Determine current column
+        const col = Math.floor(i / rowsCount);
+        
+        // Determine current row based on direction (snail pattern)
+        // Even columns (0, 2, 4...) go top-to-bottom: row = i % rowsCount
+        // Odd columns (1, 3, 5...) go bottom-to-top: row = (rowsCount - 1) - (i % rowsCount)
+        let row;
+        if (col % 2 === 0) {
+            row = i % rowsCount;
+        } else {
+            row = (rowsCount - 1) - (i % rowsCount);
+        }
+
+        result[row][col] = this[i];
+    }
+
+    return result;
+}
+
+/**
+ * const arr = [1,2,3,4];
+ * arr.snail(1,4); // [[1,2,3,4]]
+ */
