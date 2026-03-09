@@ -1,0 +1,31 @@
+/**
+ * @param {Function} fn
+ * @return {Function}
+ */
+function memoize(fn) {
+    // This Map acts as the root of our Trie
+    const root = new Map();
+
+    return function(...args) {
+        let currentLevel = root;
+
+        // Traverse the tree based on the arguments
+        for (const arg of args) {
+            if (!currentLevel.has(arg)) {
+                currentLevel.set(arg, new Map());
+            }
+            currentLevel = currentLevel.get(arg);
+        }
+
+        // Use a unique key to store the result at the end of the argument path
+        const RESULT_KEY = "__result__";
+
+        if (currentLevel.has(RESULT_KEY)) {
+            return currentLevel.get(RESULT_KEY);
+        }
+
+        const result = fn(...args);
+        currentLevel.set(RESULT_KEY, result);
+        return result;
+    }
+}
