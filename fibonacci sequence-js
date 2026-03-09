@@ -1,0 +1,29 @@
+/**
+ * @return {Generator<number>}
+ */
+var fibGenerator = function*() {
+    let prev = 0;
+    let curr = 1;
+
+    // Yield the first number in the sequence
+    yield prev;
+    // Yield the second number in the sequence
+    yield curr;
+
+    while (true) {
+        // Calculate the next Fibonacci number
+        const next = prev + curr;
+        yield next;
+        
+        // Update pointers for the next iteration
+        prev = curr;
+        curr = next;
+    }
+};
+
+/**
+ * Example usage:
+ * const gen = fibGenerator();
+ * gen.next().value; // 0
+ * gen.next().value; // 1
+ */
