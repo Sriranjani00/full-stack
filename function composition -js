@@ -1,0 +1,18 @@
+/**
+ * @param {Function[]} functions
+ * @return {Function}
+ */
+var compose = function(functions) {
+    // If the array is empty, return the identity function f(x) = x
+    if (functions.length === 0) {
+        return function(x) { return x; };
+    }
+
+    return function(x) {
+        // reduceRight starts from the last element (rightmost function)
+        // and moves toward the first element (leftmost function)
+        return functions.reduceRight((acc, fn) => {
+            return fn(acc);
+        }, x);
+    };
+};
