@@ -1,0 +1,26 @@
+/**
+ * @param {Array} arr1
+ * @param {Array} arr2
+ * @return {Array}
+ */
+var join = function(arr1, arr2) {
+    const result = {};
+
+    // Process first array
+    for (const obj of arr1) {
+        result[obj.id] = obj;
+    }
+
+    // Process second array: merge or override
+    for (const obj of arr2) {
+        if (result[obj.id]) {
+            // Spread properties: arr2 values will overwrite arr1 values
+            result[obj.id] = { ...result[obj.id], ...obj };
+        } else {
+            result[obj.id] = obj;
+        }
+    }
+
+    // Return the values sorted by ID in ascending order
+    return Object.values(result).sort((a, b) => a.id - b.id);
+};
