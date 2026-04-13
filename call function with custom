@@ -1,0 +1,14 @@
+Function.prototype.callPolyfill = function(obj, ...args) {
+    // If obj is null or undefined, default to globalThis
+    // Otherwise, ensure it's an object so we can attach the function
+    const context = (obj === null || obj === undefined) ? globalThis : Object(obj);
+    
+    // Use a Symbol to ensure we don't overwrite any existing properties
+    const fnSymbol = Symbol();
+    
+    context[fnSymbol] = this;
+    const result = context[fnSymbol](...args);
+    delete context[fnSymbol];
+    
+    return result;
+};
