@@ -1,0 +1,23 @@
+/**
+ * @param {number[]} nums
+ * @return {void}
+ */
+var ArrayWrapper = function(nums) {
+    this.nums = nums;
+};
+
+/**
+ * @return {number}
+ */
+ArrayWrapper.prototype.valueOf = function() {
+    // Sums the elements when using operators like +
+    return this.nums.reduce((sum, curr) => sum + curr, 0);
+}
+
+/**
+ * @return {string}
+ */
+ArrayWrapper.prototype.toString = function() {
+    // Formats the array as a string [1,2,3]
+    return `[${this.nums.join(',')}]`;
+}
