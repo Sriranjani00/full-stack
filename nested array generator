@@ -1,0 +1,15 @@
+/**
+ * @param {Array} arr
+ * @return {Generator}
+ */
+var inorderTraversal = function* (arr) {
+    for (const item of arr) {
+        if (Array.isArray(item)) {
+            // yield* delegates to another generator function recursively
+            yield* inorderTraversal(item);
+        } else {
+            // If it's a number, yield it directly
+            yield item;
+        }
+    }
+};
