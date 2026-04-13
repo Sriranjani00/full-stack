@@ -1,0 +1,18 @@
+/**
+ * @param {Array} arr
+ * @param {number} size
+ * @return {Array}
+ */
+var chunk = function(arr, size) {
+    const chunked = [];
+    let index = 0;
+
+    while (index < arr.length) {
+        // slice() takes a start and an end (exclusive)
+        // It automatically handles if the end is beyond the array length
+        chunked.push(arr.slice(index, index + size));
+        index += size;
+    }
+
+    return chunked;
+};
